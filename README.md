@@ -8,7 +8,8 @@ python3 fproj.py
 ```
 
 The python script will begin by importing the malicious_phish.csv file from here:
-https://drive.google.com/file/d/11aF3BWiQLhMSRAB6-UbKJap-OopCDa_E/view?usp=sharing
+* https://drive.google.com/file/d/11aF3BWiQLhMSRAB6-UbKJap-OopCDa_E/view?usp=sharing
+
 (Credit for compiling the dataset goes to Manu Siddhartha (https://www.kaggle.com/sid321axn/malicious))
 
 The script will then extract lexical features from the sample and train the model.
