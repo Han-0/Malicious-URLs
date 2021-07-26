@@ -62,11 +62,17 @@ def genearte_features(file_path):
     data['dots'] = data['url'].apply(lambda i: i.count('.'))
     # number of sub-directories
     data['directories'] = data['url'].apply(lambda i: count_sub_dir(i))
+    # number of % operators
+    data['modulos'] = data ['url'].apply(lambda i : i.count('%'))
+    # number of & operators
+    data['ampersands'] = data['url'].apply(lambda i : i.count('&'))
+    # number of underscores
+    data['underscores'] = data['url'].apply(lambda i : i.count('_'))
 
     return data
 
 def input_fn(data, batch_size):
-    features = ['length', 'https', 'http', 'domain_length', 'digits', 'ats', 'dots', 'directories']
+    features = ['length', 'https', 'http', 'domain_length', 'digits', 'ats', 'dots', 'directories', 'modulos', 'ampersands', 'underscores']
 
     data['type'] = pd.Categorical(data['type'])
     data['type'] = data.type.cat.codes
@@ -87,6 +93,9 @@ digits = tf.feature_column.numeric_column('digits')
 ats = tf.feature_column.numeric_column('ats')
 dots = tf.feature_column.numeric_column('dots')
 directories = tf.feature_column.numeric_column('directories')
+modulos = tf.feature_column.numeric_column('modulos')
+ampersands = tf.feature_column.numeric_column('ampersands')
+underscores = tf.feature_column.numeric_column('underscores')
 
 #fetch the malicious_phish.csv dataset from drive.google.com
 shr_url='https://drive.google.com/file/d/11aF3BWiQLhMSRAB6-UbKJap-OopCDa_E/view?usp=sharing'
@@ -108,7 +117,10 @@ def get_features(url):
                 'digits': [get_num_of_digits(url)], 
                 'ats': [url.count('@')], 
                 'dots': [url.count('.')], 
-                'directories': [count_sub_dir(url)] }
+                'directories': [count_sub_dir(url)],
+                'modulos': [url.count('%')],
+                'ampersands': [url.count('&')],
+                'underscores': [url.count('_')] }
     return features
 
 def pred_input_fn(features, batch_size=256):

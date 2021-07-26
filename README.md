@@ -4,7 +4,7 @@
 ```
 pip3 install -r requirements.txt
 
-python3 fproj.py
+python3 fproj_Fulner_Justin.py
 ```
 
 The python script will begin by importing the malicious_phish.csv file from here:
